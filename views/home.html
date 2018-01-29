@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<head>
+    <link href="/stylesheets/style.css" type="text/css" rel="stylesheet" />
+
+    <meta charset="UTF-8">
+    <title>管理中心</title>
+</head>
+<body>
+
+
+<div class="topnav">
+    <ul>
+        <span>位置：</span>
+        <li><a href="#">首页></a></li>
+    </ul>
+</div>
+
+<div class="mainindex">
+
+    <div class="wellcom">
+        <span><img src="/images/sun.png" alt="天气" style="vertical-align: middle"></span>
+        <b>{{username}}早上好，欢迎使用客户信息管理系统</b>
+        <a href="#">账号设置</a>
+    </div>
+
+    <div class="wellcom">
+        <span><img src="/images/time.png" alt="上次登录时间" style="vertical-align: middle"></span>
+        <i>{{lastlogin}}</i> （不是您登录的？<a href="#">请点这里</a>）
+    </div>
+
+    <div class="xline"></div>
+
+    <ul class="iconlist">
+        <li>
+            <img src="/images/ico01.png" />
+            <p><a href="#">管理设置</a></p>
+        </li>
+
+        <li>
+            <img src="/images/ico03.png" />
+            <p><a href="/customer/">数据统计</a></p>
+        </li>
+
+        <li>
+            <img src="/images/ico06.png" />
+            <p><a href="#">查询</a></p>
+        </li>
+    </ul>
+
+</div>
+
+</body>
+</html>

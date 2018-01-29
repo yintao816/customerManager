@@ -1,0 +1,377 @@
+﻿@charset "utf-8";
+
+* {
+    font-size: 9pt;
+    border: 0;
+    margin: 0;
+    padding: 0
+}
+
+body {
+    font-family: '微软雅黑';
+    margin: 0 auto;
+}
+
+ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+img {
+    border: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a, a:focus {
+    text-decoration: none;
+    color: #000;
+    outline: none;
+}
+
+.topnav {
+    height: 40px;
+    background: url("../images/righttop.gif") repeat-x
+}
+
+.topnav span {
+    line-height: 40px;
+    font-weight: bold;
+    float: left;
+    margin-left: 12px;
+    color: #dc4e00;
+}
+
+.topnav li {
+    float: left;
+    line-height: 40px;
+    margin-left: 7px;
+}
+
+.mainindex {
+    padding: 20px;
+    overflow: hidden
+}
+
+/*分割线*/
+.xline {
+    border-bottom: solid 1px #EADCC8;
+    height: 5px;
+}
+
+/*欢迎*/
+.wellcom {
+    height: 35px;
+    line-height: 35px;
+    padding-bottom: 4px;
+}
+
+.wellcom b {
+    padding-left: 8px;
+}
+
+.wellcom i {
+    padding-left: 8px;
+}
+
+.wellcom a {
+    padding-left: 12px;
+    color: #EB5409;
+}
+
+/*功能图标*/
+a:link {
+    color: #000000;
+}
+
+/*a:visited {color: #00FF00;}*/
+a:hover {
+    color: #FF00FF;
+}
+
+a:active {
+    color: #0000FF;
+}
+
+.iconlist {
+    padding-left: 40px;
+    overflow: hidden;
+}
+
+.iconlist li {
+    text-align: center;
+    float: left;
+    margin-right: 25px;
+    margin-top: 25px;
+}
+
+.iconlist li p {
+    /*设置行间的距离（行高）*/
+    line-height: 20px;
+    font-weight: normal;
+}
+
+/*数据列表界面*/
+.tablepadding {
+    padding: 0px 15px 0px 15px;
+}
+
+.tableInfo {
+    border: solid 1px #ebb683;
+    width: 100%;
+    clear: both
+}
+
+.tableInfo th {
+    background: url("../images/th.gif") repeat-x;
+    height: 34px;
+    line-height: 34px;
+    /*border: solid 1px #ECCDA1;*/
+    text-indent: 11px;
+    text-align: left;
+}
+
+.tableInfo td {
+    line-height: 35px;
+    /*首行缩进*/
+    /*text-indent: 11px;*/
+    padding-left: 10px;
+    border-right: dotted 1px #F2BF74;
+    border-bottom: dotted 1px #F2BF74;
+}
+
+.tableInfo button {
+    background-color: rgba(0, 0, 0, 0);
+    color: #dc4e00;
+}
+
+/*鼠标放在某一行上面tb的背景颜色*/
+.tableInfo tbody tr:hover {
+    background: #FFDCA9;
+}
+
+.tableInfo a {
+    color: #EB5409;
+}
+
+.bottom {
+    padding-left: 15px;
+    text-align: center;
+}
+
+.bottom i {
+    color: #EB5409;
+    font-style: normal;
+}
+
+/*登录*/
+#mainBody {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.cloud {
+    position: absolute;
+    top: 60%;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: url("../images/cloud.png") no-repeat;
+    z-index: 1;
+    opacity: 0.5
+}
+
+#cloud2 {
+    z-index: 2;
+}
+
+.logintop {
+    height: 44px;
+    color: white;
+    width: 100%;
+    background: url("../images/loginbg1.png");
+    z-index: 100
+}
+
+.logintop span {
+    line-height: 44px;
+    background: url("../images/loginsj.png") no-repeat 21px 50%;
+    text-indent: 40px;
+    float: left;
+    overflow: hidden;
+}
+
+.systemlogo {
+    background: url(../images/logo.png) no-repeat center;
+    width: 100%;
+    height: 71px;
+    margin-top: 75px
+}
+
+.loginbox {
+    background: url("../images/logininfo.png") no-repeat center;
+    width: 692px;
+    height: 336px;
+    margin: 30px auto 0;
+    /*display: block;*/
+}
+
+.loginbox ul {
+    padding-left: 285px;
+    padding-top: 70px;
+}
+
+.loginbox ul li {
+    padding-top: 20px;
+}
+
+.loginuser {
+    background: url("../images/loginuser.png") no-repeat;
+    padding-left: 42px;
+    width: 343px;
+    height: 48px
+}
+
+.loginpass {
+    background: url("../images/loginpassword.png") no-repeat;
+    padding-left: 42px;
+    width: 343px;
+    height: 48px
+}
+
+.loginbutton {
+    width: 120px;
+    height: 33px;
+    background-color: #ee5922;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 5px;
+}
+
+/*客户数据管理界面*/
+/*.addcustomerdiv {*/
+/*background-color: #d5cfc2;*/
+/*width: 100%;*/
+/*height: 30px;*/
+/*margin-top: 10px;*/
+/*}*/
+
+/*.addcustomerdiv a {*/
+/*padding-left: 15px;*/
+/*font-size: 13px;*/
+/*line-height: 30px;*/
+/*}*/
+
+.topcustomersdiv {
+    height: 30px;
+    /*background-color: #d5cfc2;*/
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.topcustomersdiv button {
+    height: 25px;
+    width: 50px;
+    margin-left: 10px;
+    font-size: 13px;
+    background-color: #d51a21;
+    color: white;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.topcustomersdiv input {
+    height: 25px;
+    width: 150px;
+    border-color: #d5cfc2;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+.deldiv {
+    width: 100%;
+    padding-top: 15px;
+    margin-bottom: 10px;
+}
+
+.deldiv button {
+    margin-left: 15px;
+    font-size: 11px;
+    /*font-weight: bold;*/
+    width: 60px;
+    height: 20px;
+    background-color: #d51a21;
+    color: white;
+    border-radius: 3px;
+}
+
+/*添加客户*/
+.addcustomertitle {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.addformBox {
+    /*padding-left: 15px;*/
+    text-align: center;
+}
+
+.addformBox ul {
+    width: 60%;
+    margin-top: 20px;
+    margin-left: 20%;
+    background-color: #f4f9fd;
+}
+
+.addformBox ul li {
+    padding-top: 15px;
+    font-size: 13px;
+    height: 30px;
+}
+
+.addformBox input {
+    font-size: 14px;
+    height: 25px;
+    width: 30%;
+    padding-right: 100px;
+    border-color: #d5cfc2;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+.addformBox button[type ~= 'submit'] {
+    font-size: 15px;
+    width: 100px;
+    height: 30px;
+    border-color: #d5cfc2;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+}
+
+/*分页*/
+.bottomPage {
+    text-align: center;
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}

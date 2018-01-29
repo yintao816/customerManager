@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员登录</title>
+    <!--<script src="/javascripts/login.js" type="text/javascript"></script>-->
+
+    <link href="/stylesheets/style.css" type="text/css" rel="stylesheet"/>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script type="text/javascript">
+
+        function adminlogin() {
+            var username = document.getElementById('user').value;
+            var password = document.getElementById('pass').value;
+            if (username == '' ||  password == '') {
+                alert('请输入用户名和密码');
+            } else {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/user/login",
+                    data: $('#loginForm').serialize(),
+                    cache: false,
+                    success: function (result) {
+                        if (result.statue == 1) {
+                            location.href = '/home?username=' + username;
+                        }else {
+                            alert(result.message);
+                        }
+                    },
+                    error : function() {
+                        alert("异常！");
+                    }
+                });
+            }
+        }
+
+    </script>
+
+</head>
+
+<body style="background-color: #df7611;">
+
+<div id="mainBody">
+    <div id="cloud1" class="cloud"></div>
+    <div id="cloud2" class="cloud"></div>
+</div>
+
+<div class="logintop">
+    <span>欢迎登陆后台管理系统</span>
+</div>
+
+<div class="systemlogo"></div>
+
+<div class="loginbox">
+    <form id="loginForm" method="post" target="id_iframe">
+        <ul>
+            <li><input type="text" class="loginuser" placeholder="用户名" id="user" name="username"></li>
+            <li><input type="password" class="loginpass" placeholder="密码" id="pass" name="password"
+                       onclick="this.value=''"></li>
+            <li><input id="login" type="button" class="loginbutton" value="登录" onclick="adminlogin()"></li>
+        </ul>
+    </form>
+</div>
+
+</body>
+</html>

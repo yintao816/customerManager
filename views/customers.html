@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户列表</title>
+
+    <link href="/stylesheets/style.css" type="text/css" rel="stylesheet"/>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/javascripts/customers.js"></script>
+    <script src="/javascripts/pageManage.js"></script>
+    <script src="/alert/js/ui.js"></script>
+    <link href="/alert/css/style.css" type="text/css" rel="stylesheet"/>
+
+    <!--<link rel="import" href="/stylesheets/topnav.html">-->
+
+</head>
+<body>
+
+<script>
+    $(function () {
+        PagingManage($('#pageIndex'), 100, 10, 1)
+    });
+</script>
+
+<!--<script>-->
+    <!--var link = document.querySelector('link[rel="import"]');-->
+    <!--var content = link.import;-->
+
+    <!--var el = content.querySelector('.topnav');-->
+    <!--alert(el);-->
+    <!--// 从 topnav.html 的文档中获取 DOM。-->
+    <!--document.body.appendChild(el.cloneNode(true));-->
+<!--</script>-->
+
+<div class="topcustomersdiv">
+    <!--<a href="/customer/add" target="_blank">添加客户</a>-->
+    <form onsubmit="return selectedcustomer()" method="get">
+        <input id="keyword" type="text" placeholder="请输入搜索关键字">
+        <button type="submit">查询</button>
+    </form>
+</div>
+
+<div class="tablepadding">
+    <table id="tb" class="tableInfo">
+        <thead>
+        <tr>
+            <th><input type="checkbox" value="" onchange="selectall(this)"></th>
+            <th>编号</th>
+            <th>公司</th>
+            <th>客户</th>
+            <th>籍贯</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        </tbody>
+
+    </table>
+</div>
+
+<div class="deldiv">
+    <button onclick="delall()">删除选中</button>
+    <button onclick="addcustomer()">添加</button>
+</div>
+
+<!--<div class="bottom" id="pageIndex">-->
+    <!--共<i>134</i>条记录，当前显示第<i>2</i>页-->
+<!--</div>-->
+
+<div>
+    <ul id="pageIndex" class="bottomPage"></ul>
+</div>
+
+</body>
+</html>
