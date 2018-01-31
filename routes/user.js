@@ -14,7 +14,7 @@ router.post('/login', function (req, res, next) {
             } else {
                 console.log(result);
                 if (result.password == password) {
-                    res.send({statue: 1, message: '登录成功'});
+                    res.send({statue: 1, message: '登录成功', data: result});
                 } else {
                     res.send({statue: 0, message: '密码不正确'});
                 }

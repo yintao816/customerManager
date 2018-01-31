@@ -13,6 +13,7 @@ var customer = require('./routes/customer')
 
 var db = require('./model/db');
 db.dbconnect();
+db.addtestdata();
 
 var app = express();
 

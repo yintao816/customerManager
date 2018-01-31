@@ -24,6 +24,7 @@
                     cache: false,
                     success: function (result) {
                         if (result.statue == 1) {
+                            window.localStorage.userinfo = result.data._id;
                             location.href = '/home?username=' + username;
                         }else {
                             alert(result.message);

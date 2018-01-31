@@ -12,6 +12,8 @@
  * */
 
 var mongoose = require('mongoose');
+var Customer = require('../model/customer');
+
 var dburl = 'mongodb://localhost:27017/customer_manager';
 
 /**
@@ -36,3 +38,32 @@ mongoose.connection.on('disconnected', function () {
 });
 
 module.exports.dbconnect = dbconnect;
+
+module.exports.addtestdata = function () {
+    // var tempdata = [];
+    // for (var i = 400000; i<600000; i ++) {
+    //     var customer = new Customer({
+    //         nativeplace: '湖北武汉',
+    //         company: '散哒几号放假看老大时空裂缝记得环',
+    //         contacts: '我是第' + i + '条数据'
+    //     });
+    //     tempdata.push(customer);
+    //
+    //     // customer.save(function (err, cus, numAffected) {
+    //     //     if (err) {
+    //     //         console.log(err)
+    //     //     }
+    //     // });
+    // }
+    // console.log(tempdata.length);
+    //
+    // Customer.insertMany(tempdata)
+    //     .then(function(docs) {
+    //         // do something with docs
+    //         // console.log(docs);
+    //     })
+    //     .catch(function(err) {
+    //         // error handling here
+    //         console.log(err);
+    //     });
+}

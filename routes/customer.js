@@ -15,11 +15,17 @@ router.get('/add', function (req, res, next) {
 
 // 添加客户
 router.post('/add', function (req, res) {
+    var relevantuser = req.body.relevantuser;
+    if (!relevantuser || typeof relevantuser === 'undefine') {
+        res.send({status: 0, message: '参数错误！'});
+        return
+    }
     console.log(req.body);
     var customer = new Customer({
         nativeplace: req.body.nativeplace,
         company: req.body.company,
-        contacts: req.body.contacts
+        contacts: req.body.contacts,
+        relevantuser: relevantuser
     });
 
     customer.save(function (err, cus, numAffected) {
@@ -35,7 +41,6 @@ router.post('/add', function (req, res) {
 router.post('/del', function (req, res) {
     if (req.body.ids.length > 0) {
         var condition = {_id: {$in: req.body.ids.split(',')}}
-        console.log(condition);
         Customer.remove(condition, function (err) {
             if (err) {
                 res.send({status: 0, message: 'failure！'})
@@ -51,31 +56,65 @@ router.post('/del', function (req, res) {
 // 获取客户信息
 router.get('/all', function (req, res) {
     var keyword = url.parse(req.url, true).query.keyword;
-    if (!keyword) {
-        // 查询所有
-        Customer.find(function (err, result) {
-            if (err) {
-                res.send({status: 0, message: '没有客户信息！'})
-            } else {
-                res.send({status: 1, message: 'success！', data: result});
-            }
-        });
-    } else {
-        var reg = new RegExp(keyword); //不区分大小写
-        Customer.find(
-            {
-                $or: [ //多条件，数组
-                    {company: {$regex: reg}},
-                    {contacts: {$regex: reg}}
-                ]
-            }, function (err, result) {
+    var _id = url.parse(req.url, true).query._id;
+    var relevantuser = url.parse(req.url, true).query.relevantuser;
+    var isnext = Boolean(url.parse(req.url, true).query.isnext);
+
+    if (!relevantuser || typeof relevantuser === 'undefine') {
+        res.send({status: 0, message: '参数错误！'});
+        return
+    }
+
+    if (!keyword || typeof keyword === 'undefine') {
+        console.log('查询所有');
+        if (!_id) {
+            Customer.find({'relevantuser': relevantuser}, function (err, result) {
                 if (err) {
                     res.send({status: 0, message: '没有客户信息！'})
                 } else {
-                    res.send({status: 1, message: 'success！', data: result});
+                    dealresult(result, res, {});
                 }
-            });
+            }).limit(20);
+        } else {
+            var condition = isnext == true ? {_id: {$gt: _id}} : {_id: {$lt: _id}};
+            condition['relevantuser'] = relevantuser;
+            Customer.find(condition, function (err, result) {
+                if (err) {
+                    res.send({status: 0, message: '没有客户信息！'})
+                } else {
+                    dealresult(result, res, {});
+                }
+            }).limit(20);
+        }
+    } else {
+        console.log('条件查询');
+        var reg = new RegExp(keyword); //不区分大小写
+        var condition = {
+            $or: [ //多条件，数组
+                {company: {$regex: reg}},
+                {contacts: {$regex: reg}}
+            ],
+            'relevantuser': relevantuser
+        }
+        Customer.find(condition, function (err, result) {
+            if (err) {
+                res.send({status: 0, message: '没有客户信息！'})
+            } else {
+                dealresult(result, res, condition);
+            }
+        }).limit(20);
     }
 });
+
+function dealresult(result, res, condition) {
+    Customer.count(condition, function (err, count) {
+        res.send({
+            status: 1,
+            message: 'success！',
+            data: result,
+            pagecount: Math.ceil(count / 20)
+        });
+    });
+}
 
 module.exports = router;

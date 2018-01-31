@@ -1,23 +1,48 @@
+// 展示数据源
 var listdatas = [];
+// 当前页码 - 从1开始
+var pageindex = 1;
+// 总页数
+var pagecount = 1;
+// 是否是获取下一页
+var isnext;
 
 $(document).ready(function () {
-    getlist();
+    getlist(true);
 });
 
-function getlist() {
+function getlist(resetpage) {
+    var relevantuser = window.localStorage.userinfo;
+    if (!relevantuser || typeof relevantuser === 'undefine') {
+        return
+    }
+
+    var keyword = document.getElementById('keyword').value;
+    var arg = {'keyword': keyword, 'relevantuser': relevantuser};
+    if (resetpage === true) {
+        pageindex = 1;
+    }else {
+        if(listdatas.length >0) {
+           arg['_id'] = isnext == true ? listdatas[listdatas.length - 1]._id : listdatas[0]._id;
+        }
+        arg['isnext'] = isnext;
+    }
     $.ajax({
         type: "GET",
         dataType: "json",
         url: "/customer/all",
+        data: arg,
         cache: false,
         success: success,
         error: error
     });
-};
-
+    // 禁止界面跳转
+    return false;
+}
 
 function success(result) {
     if (result.status == 1) {
+        pagecount = result.pagecount;
         //删除之前的数据
         $('#tb tr:gt(0)').remove();
         var s = '';
@@ -25,6 +50,7 @@ function success(result) {
             s += '<tr><td>' + '<input type="checkbox" name="select_item"></td><td>' + item._id + '</td><td>' + item.company + '</td><td>' + item.contacts + '</td><td>' + item.nativeplace + '</td><td>' + '<button>查看</button> <button onclick="delrow(this)">删除</button></td></tr>';
         })
         $('#tb').append(s);
+        PagingManage1($('#pageIndex'),pagecount , pageindex);
         listdatas = result.data;
     } else {
         alert(result.message);
@@ -32,10 +58,20 @@ function success(result) {
 }
 
 function error() {
-    alert("异常！");
+    $('#tb tr:gt(0)').remove();
+    if (isnext === true) {
+        pageindex--;
+    }else {
+        pageindex++;
+    }
 }
 
 function delrow(row) {
+    var relevantuser = window.localStorage.userinfo;
+    if (!relevantuser || typeof relevantuser === 'undefine') {
+        return
+    }
+
     mizhu.confirm('温馨提醒', '删除后无法恢复，确定要删除？', function (flag) {
         if (flag) {
             var rowidx = row.parentNode.parentNode.rowIndex;
@@ -44,7 +80,7 @@ function delrow(row) {
                 type: "POST",
                 dataType: "json",
                 url: "/customer/del",
-                data: {'ids': _id.toString()},
+                data: {'ids': _id.toString(), 'relevantuser': relevantuser},
                 cache: false,
                 success: function (res) {
                     if (res.status == 1) {
@@ -61,6 +97,11 @@ function delrow(row) {
 }
 
 function delall() {
+    var relevantuser = window.localStorage.userinfo;
+    if (!relevantuser || typeof relevantuser === 'undefine') {
+        return
+    }
+
     var arr = $("table td input[type=checkbox]:checked");
     var ids = '';
     for (var idx = 0; idx < arr.length; idx++) {
@@ -77,7 +118,7 @@ function delall() {
                     type: "POST",
                     dataType: "json",
                     url: "/customer/del",
-                    data: {'ids': ids},
+                    data: {'ids': ids, 'relevantuser': relevantuser},
                     cache: false,
                     success: function (res) {
                         if (res.status == 1) {
@@ -97,22 +138,6 @@ function delall() {
     }
 }
 
-function selectedcustomer() {
-    var keyword = document.getElementById('keyword').value;
-    if (keyword.length > 0) {
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: "/customer/all",
-            data: {'keyword': keyword},
-            cache: false,
-            success: success,
-            error: error
-        });
-    }
-    // 禁止界面跳转
-    return false;
-}
 
 function addcustomer() {
     window.open('/customer/add');
@@ -123,4 +148,16 @@ function selectall(checkbox) {
     for (var i = 0; i < checkboxes.length; i++) {
         checkboxes[i].checked = checkbox.checked;
     }
+}
+
+function switchPage(next) {
+    if (next === true && pageindex < pagecount) {
+        pageindex += 1;
+    }else if(next === false && pageindex > 1) {
+            pageindex -=1;
+    }else {
+        return
+    }
+    isnext = next;
+    getlist(false);
 }

@@ -16,25 +16,8 @@
 </head>
 <body>
 
-<script>
-    $(function () {
-        PagingManage($('#pageIndex'), 100, 10, 1)
-    });
-</script>
-
-<!--<script>-->
-    <!--var link = document.querySelector('link[rel="import"]');-->
-    <!--var content = link.import;-->
-
-    <!--var el = content.querySelector('.topnav');-->
-    <!--alert(el);-->
-    <!--// 从 topnav.html 的文档中获取 DOM。-->
-    <!--document.body.appendChild(el.cloneNode(true));-->
-<!--</script>-->
-
 <div class="topcustomersdiv">
-    <!--<a href="/customer/add" target="_blank">添加客户</a>-->
-    <form onsubmit="return selectedcustomer()" method="get">
+    <form onsubmit="return getlist(true)" method="get">
         <input id="keyword" type="text" placeholder="请输入搜索关键字">
         <button type="submit">查询</button>
     </form>
@@ -66,11 +49,11 @@
 </div>
 
 <!--<div class="bottom" id="pageIndex">-->
-    <!--共<i>134</i>条记录，当前显示第<i>2</i>页-->
+<!--共<i>134</i>条记录，当前显示第<i>2</i>页-->
 <!--</div>-->
 
-<div>
-    <ul id="pageIndex" class="bottomPage"></ul>
+<div class="bottomPage">
+    <ul id="pageIndex"></ul>
 </div>
 
 </body>

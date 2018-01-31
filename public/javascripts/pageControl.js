@@ -5,7 +5,10 @@
  * @param  pageSize number 分页大小
  * @param currentPage number 当前页
  */
-function PagingManage(obj, pageCount, pageSize, currentPage) {
+
+var page = 0;
+
+function PagingManage(obj, pageCount, pageSize, currentPage, callback) {
     if (obj) {
         var dataCount = pageCount; //数据总数
         var pagesize = pageSize;//单页数量
@@ -75,6 +78,21 @@ function PagingManage(obj, pageCount, pageSize, currentPage) {
                 pagehtml += '<li><a href="javascript:void(0);" onclick="switchPage(\'' + divId + '\',' + (currentpage + 1) + ')">下一页</a></li>';
             }
             // pagehtml = '<ul>' + pagehtml + '</ul>'
+        }
+        obj.html(pagehtml);
+    }
+}
+
+function PagingManage1(obj, pageCount, currentPage) {
+    if (obj) {
+        var pagehtml = "";
+        //只有一页内容
+        if (pageCount <= 1) {
+            pagehtml = "";
+        } else {
+            pagehtml += '<a href="javascript:void(0);" onclick="switchPage(false)">上一页</a>'
+            pagehtml += '<li><i>' + currentPage + "/" + pageCount + '</i></li>';
+            pagehtml += '<a href="javascript:void(0);" onclick="switchPage(true)">下一页</a>'
         }
         obj.html(pagehtml);
     }

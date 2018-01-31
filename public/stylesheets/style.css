@@ -368,10 +368,34 @@ a:active {
 }
 
 /*分页*/
+
+/**
+ * bottomPage 与.bottomPage ul li配合使无序列表横盘居中显示
+ **/
 .bottomPage {
     text-align: center;
-    display: block;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    /*width: 100%;*/
+    /*height: 30px;*/
+}
+
+/*.bottomPage ul {*/
+    /*width: 100%;*/
+    /*height: 30px;*/
+    /*background-color: #dc4e00;*/
+/*}*/
+
+.bottomPage ul li {
+    /*padding-left: 10px;*/
+    /*width: 100px;*/
+    list-style-type: none;
+    display: inline;
+}
+
+.bottomPage p {
+    list-style-type: none;
+}
+
+.bottomPage i {
+    margin-left: 10px;
+    margin-right: 10px;
 }

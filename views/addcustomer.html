@@ -6,39 +6,50 @@
 
     <link href="/stylesheets/style.css" type="text/css" rel="stylesheet"/>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-
+    <!--relevantuser-->
     <script type="text/javascript">
         function addcustomer() {
-            var nativeplace = document.getElementById('nativeplace_id').value;
-            var company = document.getElementById('company_id').value;
-            var contacts = document.getElementById('contacts_id').value;
-            if (nativeplace == '' &&  company == '' && contacts == '') {
-                alert('不能所有信息都为空！');
+            var relevantuser = window.localStorage.userinfo;
+            if (!relevantuser) {
+                alert('请登录后进行添加用户');
             } else {
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    url: "/customer/add",
-                    data: $('#addform').serialize(),
-                    cache: false,
-                    success: function (result) {
-                        alert(result.message);
-                    },
-                    error : function() {
-                        alert("异常！");
+                var nativeplace = document.getElementById('nativeplace_id').value;
+                var company = document.getElementById('company_id').value;
+                var contacts = document.getElementById('contacts_id').value;
+                if (nativeplace == '' && company == '' && contacts == '') {
+                    alert('不能所有信息都为空！');
+                } else {
+                    var args = {
+                        'nativeplace': nativeplace,
+                        'company': company,
+                        'contacts': contacts,
+                        'relevantuser': relevantuser,
                     }
-                });
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "/customer/add",
+                        data: args,
+                        cache: false,
+                        success: function (result) {
+                            alert(result.message);
+                        },
+                        error: function () {
+                            alert("异常！");
+                        }
+                    });
+                }
             }
             // 禁止表单提交
             return false
         }
 
-    // 动态添加联系人输入框
-    function addcontacts() {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'text');
-        document.getElementById('ulform').appendChild(input);
-    }
+        // 动态添加联系人输入框
+        function addcontacts() {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'text');
+            document.getElementById('ulform').appendChild(input);
+        }
     </script>
 </head>
 
@@ -51,7 +62,9 @@
         <ul id="ulform">
             <li>公司：<input type="text" name="company" id="company_id"></li>
             <li>地址：<input type="text" name="nativeplace" id="nativeplace_id"></li>
-            <li>联系人：<input type="text" name="contacts" id="contacts_id"> <button type="button" class="addcontacts" onclick="addcontacts()">添加</button></li>
+            <li>联系人：<input type="text" name="contacts" id="contacts_id">
+                <button type="button" class="addcontacts" onclick="addcontacts()">添加</button>
+            </li>
             <li>
                 <button type="submit" title="提交">提交</button>
             </li>
