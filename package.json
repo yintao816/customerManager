@@ -20,3 +20,6 @@
     "silly-datetime": "^0.1.2"
   }
 }
+
+//如果直接 npm start 或 node app.js 启动，则一旦退出 ssh 远程登陆，nodeapp 就会停止运行。
+//因此我们使用 forever 启动 nodeapp。NODE_ENV=production forever start app.js
