@@ -48,7 +48,12 @@ function success(result) {
         $('#tb tr:gt(0)').remove();
         var s = '';
         result.data.forEach(function (item, index) {
-            s += '<tr><td>' + '<input type="checkbox" name="select_item"></td><td>' + item.company + '</td><td>' + item.contacts + '</td><td>' + item.nativeplace + '</td><td>' + '<button>查看</button> <button onclick="delrow(this)">删除</button></td></tr>';
+            var tempcontacts = '';
+            for (var i =0;i<item.contacts.length;i++) {
+                tempcontacts += item.contacts[i];
+                if (i < item.contacts.length - 1) { tempcontacts += '</br>' };
+            }
+            s += '<tr><td>' + '<input type="checkbox" name="select_item"></td><td>' + item.company + '</td><td>' + tempcontacts + '</td><td>' + item.nativeplace + '</td><td>' + '<button>查看</button> <button onclick="delrow(this)">删除</button></td></tr>';
         })
         $('#tb').append(s);
         PagingManage1($('#pageIndex'),pagecount , pageindex);

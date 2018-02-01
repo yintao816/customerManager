@@ -8,6 +8,8 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!--relevantuser-->
     <script type="text/javascript">
+        var inputindex = 1;
+
         function addcustomer() {
             var relevantuser = window.localStorage.userinfo;
             if (!relevantuser) {
@@ -15,7 +17,14 @@
             } else {
                 var nativeplace = document.getElementById('nativeplace_id').value;
                 var company = document.getElementById('company_id').value;
-                var contacts = document.getElementById('contacts_id').value;
+                var contacts = '';
+                for (var i = 0; i < inputindex; i++) {
+                    var val = document.getElementById('contacts_' + i).value;
+                    if (val.length > 0) {
+                        contacts += val + ',';
+                    }
+                }
+                contacts = contacts.substring(0, contacts.length - 1);
                 if (nativeplace == '' && company == '' && contacts == '') {
                     alert('不能所有信息都为空！');
                 } else {
@@ -48,7 +57,11 @@
         function addcontacts() {
             var input = document.createElement('input');
             input.setAttribute('type', 'text');
+            input.setAttribute('name', 'contacts');
+            input.setAttribute('id', 'contacts_' + inputindex);
             document.getElementById('ulform').appendChild(input);
+
+            inputindex++;
         }
     </script>
 </head>
@@ -62,13 +75,11 @@
         <ul id="ulform">
             <li>公司：<input type="text" name="company" id="company_id"></li>
             <li>地址：<input type="text" name="nativeplace" id="nativeplace_id"></li>
-            <li>联系人：<input type="text" name="contacts" id="contacts_id">
+            <li>联系人：<input type="text" name="contacts" id="contacts_0">
                 <button type="button" class="addcontacts" onclick="addcontacts()">添加</button>
             </li>
-            <li>
-                <button type="submit" title="提交">提交</button>
-            </li>
         </ul>
+        <button type="submit" title="提交">提交</button>
     </form>
 </div>
 </body>

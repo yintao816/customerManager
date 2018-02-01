@@ -21,10 +21,11 @@ router.post('/add', function (req, res) {
         return
     }
     console.log(req.body);
+    var contacts = req.body.contacts.split(',');
     var customer = new Customer({
         nativeplace: req.body.nativeplace,
         company: req.body.company,
-        contacts: req.body.contacts,
+        contacts: contacts,
         relevantuser: relevantuser
     });
 
