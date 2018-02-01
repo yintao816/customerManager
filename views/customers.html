@@ -19,7 +19,7 @@
 <div class="topcustomersdiv">
     <form onsubmit="return getlist(true)" method="get">
         <input id="keyword" type="text" placeholder="请输入搜索关键字">
-        <button type="submit">查询</button>
+        <button id="findbutton" type="submit">查询</button>
     </form>
 </div>
 
@@ -28,7 +28,6 @@
         <thead>
         <tr>
             <th><input type="checkbox" value="" onchange="selectall(this)"></th>
-            <th>编号</th>
             <th>公司</th>
             <th>客户</th>
             <th>籍贯</th>

@@ -27,6 +27,7 @@ function getlist(resetpage) {
         }
         arg['isnext'] = isnext;
     }
+    document.getElementById('findbutton').disabled = true;
     $.ajax({
         type: "GET",
         dataType: "json",
@@ -47,7 +48,7 @@ function success(result) {
         $('#tb tr:gt(0)').remove();
         var s = '';
         result.data.forEach(function (item, index) {
-            s += '<tr><td>' + '<input type="checkbox" name="select_item"></td><td>' + item._id + '</td><td>' + item.company + '</td><td>' + item.contacts + '</td><td>' + item.nativeplace + '</td><td>' + '<button>查看</button> <button onclick="delrow(this)">删除</button></td></tr>';
+            s += '<tr><td>' + '<input type="checkbox" name="select_item"></td><td>' + item.company + '</td><td>' + item.contacts + '</td><td>' + item.nativeplace + '</td><td>' + '<button>查看</button> <button onclick="delrow(this)">删除</button></td></tr>';
         })
         $('#tb').append(s);
         PagingManage1($('#pageIndex'),pagecount , pageindex);
@@ -55,6 +56,8 @@ function success(result) {
     } else {
         alert(result.message);
     }
+
+    document.getElementById('findbutton').disabled = false;
 }
 
 function error() {

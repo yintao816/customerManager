@@ -16,6 +16,7 @@
             if (username == '' ||  password == '') {
                 alert('请输入用户名和密码');
             } else {
+                document.getElementById('login').disabled = true;
                 $.ajax({
                     type: "POST",
                     dataType: "json",
@@ -29,8 +30,10 @@
                         }else {
                             alert(result.message);
                         }
+                        document.getElementById('login').disabled = false;
                     },
                     error : function() {
+                        document.getElementById('login').disabled = false;
                         alert("异常！");
                     }
                 });
