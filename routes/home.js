@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 
     if (typeof arg.username !== undefined || arg.username !== null || arg.username !== '') {
         Admin.findOne({'username': arg.username}, function (err, rest) {
-            var updates = {$set: {lastlogin: sd.format(new Date().toLocaleString(), 'YYYY-MM-DD HH:mm:ss')}};
+            var updates = {$set: {lastlogin: sd.format(new Date().toLocaleString('UTC'), 'YYYY-MM-DD HH:mm:ss')}};
             var condition = {_id: rest._id};
             Admin.update(condition, updates, function (err, result) { });
 
