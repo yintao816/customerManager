@@ -55,11 +55,22 @@
 
         // 动态添加联系人输入框
         function addcontacts() {
-            var input = document.createElement('input');
-            input.setAttribute('type', 'text');
-            input.setAttribute('name', 'contacts');
-            input.setAttribute('id', 'contacts_' + inputindex);
-            document.getElementById('ulform').appendChild(input);
+            // var input = document.createElement('input');
+            var id = 'contacts_' + inputindex
+            // input.setAttribute('type', 'text');
+            // input.setAttribute('name', 'contacts');
+            // input.setAttribute('id', id);
+            // document.getElementById('ulform').appendChild(input);
+
+            var appendHtml = '<input type="text" name="contacts" id=' + '"' + id + '"' + ">";
+            $("#ulform").append(appendHtml);
+            $("#ulform").listview("refresh");   //在使用'ul'标签时才使用，作用:刷新列表
+
+            // $(".addformBoxLi").append(appendHtml);
+            // $(".addformBoxLi").trigger("create");
+            // alert(appendHtml);
+            // var targetObj = $(appendHtml).appendTo("#ulform");
+            // $.parser.parse(targetObj);
 
             inputindex++;
         }
