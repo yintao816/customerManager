@@ -55,23 +55,9 @@
 
         // 动态添加联系人输入框
         function addcontacts() {
-            // var input = document.createElement('input');
-            var id = 'contacts_' + inputindex
-            // input.setAttribute('type', 'text');
-            // input.setAttribute('name', 'contacts');
-            // input.setAttribute('id', id);
-            // document.getElementById('ulform').appendChild(input);
-
-            var appendHtml = '<input type="text" name="contacts" id=' + '"' + id + '"' + ">";
-            $("#ulform").append(appendHtml);
-            $("#ulform").listview("refresh");   //在使用'ul'标签时才使用，作用:刷新列表
-
-            // $(".addformBoxLi").append(appendHtml);
-            // $(".addformBoxLi").trigger("create");
-            // alert(appendHtml);
-            // var targetObj = $(appendHtml).appendTo("#ulform");
-            // $.parser.parse(targetObj);
-
+            var id = 'contacts_' + inputindex;
+            var htmlstr = "<li><input type=\"text\" placeholder=\"客户名称+联系方式\" name=\"contacts\" class='appendInput' id=" + "\"" + id + "\">" + "</li>";
+            $('#ulform').append(htmlstr);
             inputindex++;
         }
     </script>
@@ -86,7 +72,7 @@
         <ul id="ulform">
             <li>公司：<input type="text" name="company" id="company_id"></li>
             <li>地址：<input type="text" name="nativeplace" id="nativeplace_id"></li>
-            <li>联系人：<input type="text" name="contacts" id="contacts_0">
+            <li>联系人：<input type="text" name="contacts" id="contacts_0" placeholder="客户名称+联系方式">
                 <button type="button" class="addcontacts" onclick="addcontacts()">添加</button>
             </li>
         </ul>

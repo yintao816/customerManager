@@ -240,7 +240,7 @@ a:active {
 }
 
 .loginuser {
-    background: url("../images/loginuser.png") no-repeat;
+    background:  url(../images/loginuser.png) no-repeat;
     padding-left: 42px;
     width: 343px;
     height: 48px
@@ -360,6 +360,10 @@ a:active {
     border-width: 1px;
     border-style: solid;
     border-radius: 5px;
+}
+
+.appendInput {
+    margin-left: 13px;
 }
 
 .addformBox button[type ~= 'submit'] {
